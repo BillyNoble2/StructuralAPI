@@ -9,13 +9,13 @@ namespace StructuralAPI.Controllers
     public class FlatBarController : Controller
     {
         [HttpPost(Name = "calculate")]
-        public IActionResult Calculate([FromBody] FlatBarData request)
+        public IActionResult Calculate([FromBody] FlatBarDataIn request)
         {
             try
             {
-                double result = 0;
-                result = CalculationEngines.FlatBarDesigner.Calculator(request);
-                return Ok(new { result });
+                FlatBarDataOut response;
+                response = CalculationEngines.FlatBarDesigner.Calculator(request);
+                return Ok(new { response });
             }
             catch (ArgumentException ex)
             {
