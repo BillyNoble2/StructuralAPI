@@ -9,7 +9,7 @@
         public double NetArea { get; set; }
         public double TotalBoltShearRes { get; set; }
         public double PlateFu { get; set; }
-        public double TentionResistance { get; set; }
+        public double TensionResistance { get; set; }
         public double DimA { get; set; }
         public double DimB { get; set; }
         public double DimC { get; set; }

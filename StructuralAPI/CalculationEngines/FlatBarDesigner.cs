@@ -16,7 +16,7 @@ namespace StructuralAPI.CalculationEngines
             double netArea = CalculateNetArea(request.Width, request.Thickness, boltsPerRow, boltHoleDiameter);
             double totalBoltShearRes = CalculateBoltShearRes(request.BoltDiameter, numberOfBolts);
             double plateFu = DeterminePlateFu(request.PlateGrade, request.Thickness);
-            double tentionResistance = CalculateTensionResistance(netArea, plateFu);
+            double tensionResistance = CalculateTensionResistance(netArea, plateFu);
 
             double dimA = CalculateDimA(request.BoltDiameter);
             double dimB = CalculateDimB(request.BoltDiameter, boltsPerRow, request.Width);
@@ -31,6 +31,8 @@ namespace StructuralAPI.CalculationEngines
                 BoltsPerRow = boltsPerRow,
                 NetArea = netArea,
                 TotalBoltShearRes = totalBoltShearRes,
+                PlateFu = plateFu,
+                TensionResistance = tensionResistance,
                 DimA = dimA,
                 DimB = dimB,
                 DimC = dimC,

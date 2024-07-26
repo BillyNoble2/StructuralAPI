@@ -7,5 +7,6 @@
         public double Thickness { get; set; }
         public double BoltDiameter { get; set; }
         public string PlateGrade { get; set; }
+        public double BoltGrade { get; set; }
     }
 }
