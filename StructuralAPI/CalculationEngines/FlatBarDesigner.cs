@@ -1,5 +1,6 @@
 ﻿using static StructuralAPI.Controllers.FlatBarController;
 using StructuralAPI.Models;
+using System;
 
 namespace StructuralAPI.CalculationEngines
 {
@@ -10,6 +11,7 @@ namespace StructuralAPI.CalculationEngines
             double grossArea = CalculateGrossArea(request.Width, request.Thickness);
             double boltHoleDiameter = DetermineBoltHoleDia(request.BoltDiameter);
             double numberOfBolts = CalculateNumberBolts(request.BoltDiameter, request.TensionLoad);
+            double boltsPerRow = DetermineBoltsInRow(request.BoltDiameter, numberOfBolts, request.Width);
             return grossArea;
         }
 
@@ -66,7 +68,56 @@ namespace StructuralAPI.CalculationEngines
         }
         public static double DetermineBoltsInRow(double boltDia, double numberBolts, double plateWidth)
         {
-            return 1;
+            switch (boltDia)
+            {
+                case 20:
+                    if (plateWidth >= 180 && numberBolts % 3 == 0)
+                    {
+                        return 3;
+                    }
+                    if (plateWidth >= 180 && numberBolts % 2 == 0)
+                    {
+                        return 2;
+
+                    }
+                    if (plateWidth < 180 && numberBolts % 2 == 0)
+                    {
+                        return 2;
+
+                    }
+                    break;
+                case 24:
+                    if (plateWidth >= 210 && numberBolts % 3 == 0)
+                    {
+                        return 3;
+                    }
+                    if (plateWidth >= 210 && numberBolts % 2 == 0)
+                    {
+                        return 2;
+                    }
+                    if (plateWidth < 210 && numberBolts % 2 == 0)
+                    {
+                        return 2;
+                    }
+                    break;
+                case 30:
+                    if (plateWidth >= 300 && numberBolts % 3 == 0)
+                    {
+                        return 3;
+                    }
+                    if (plateWidth >= 300 && numberBolts % 2 == 0)
+                    {
+                        return 2;
+                    }
+                    if (plateWidth < 300 && numberBolts % 2 == 0)
+                    {
+                        return 2;
+                    }
+                    break;
+                default:
+                    throw new ArgumentException("Unable to determine number of botls per row");
+            }
+            throw new ArgumentException("Unable to determine number of botls per row");
         }
     }
 }
