@@ -22,6 +22,7 @@ namespace StructuralAPI.CalculationEngines
             double dimB = CalculateDimB(request.BoltDiameter, boltsPerRow, request.Width);
             double dimC = CalculateDimC(request.BoltDiameter);
             double dimD = CalculateDimD(boltsPerRow, numberOfBolts, request.BoltDiameter);
+            string diagram = DetermineDiagram(boltsPerRow, numberOfBolts);
 
             var response = new FlatBarDataOut
             {
@@ -36,7 +37,8 @@ namespace StructuralAPI.CalculationEngines
                 DimA = dimA,
                 DimB = dimB,
                 DimC = dimC,
-                DimD = dimD
+                DimD = dimD,
+                Diagram = diagram
             };
             return response;
         }
@@ -312,6 +314,29 @@ namespace StructuralAPI.CalculationEngines
             else
             {
                 return 0;
+            }
+        }
+        public static string DetermineDiagram(double boltsPerRow, double numberOfBolts)
+        {
+            if (boltsPerRow == 2 && numberOfBolts < 3)
+            {
+                return "A";
+            }
+            if (boltsPerRow == 3 && numberOfBolts < 4)
+            {
+                return "B";
+            }
+            if (boltsPerRow == 2 && numberOfBolts == 4)
+            {
+                return "C";
+            }
+            if (boltsPerRow == 3 && numberOfBolts == 6)
+            {
+                return "D";
+            }
+            else
+            {
+                throw new ArgumentException("Unable to determine correct diagram");
             }
         }
 

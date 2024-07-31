@@ -14,5 +14,6 @@
         public double DimB { get; set; }
         public double DimC { get; set; }
         public double DimD { get; set; }
+        public string Diagram { get; set; }
     }
 }
