@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StructuralAPI.CalculationEngines;
 using StructuralAPI.Models;
+using Newtonsoft.Json;
 
 namespace StructuralAPI.Controllers
 {
@@ -15,7 +16,8 @@ namespace StructuralAPI.Controllers
             {
                 FlatBarDataOut response;
                 response = CalculationEngines.FlatBarDesigner.Calculator(request);
-                return Ok(new { response });
+                var json = JsonConvert.SerializeObject(response);
+                return Ok(json);
             }
             catch (ArgumentException ex)
             {
