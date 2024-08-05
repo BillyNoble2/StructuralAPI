@@ -336,7 +336,7 @@ namespace StructuralAPI.CalculationEngines
             }
             else
             {
-                throw new ArgumentException("Unable to determine correct diagram");
+                return "X";
             }
         }
 
