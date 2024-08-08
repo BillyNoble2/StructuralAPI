@@ -9,6 +9,8 @@ namespace StructuralAPI.CalculationEngines
             double windUDL = CalculateUniformWindLoad(request.PositiveWindPressure, request.ColumnCentres, request.WindLoadFactor);
             double factoredAxialLoad = CalculateAxialLoad(request.DeadLoadFactor, request.LiveLoadFactor, request.RoofDeadLoad, request.RoofLiveLoad, request.ColumnCentres, request.FrameCentres);
             double factoredBendingMoment = CalculateBendingMoment(windUDL, request.WindLoadFactor, request.ColumnHeight);
+            double factoredShearForce = CalculateShearForce(windUDL, request.WindLoadFactor, request.ColumnHeight);
+            double maximumAllowableDef = CalculateMaxAllowableDefl(request.ColumnHeight, request.AllowableDeflection);
         }
         /// <summary>
         /// Calculate uniform wind load on post (Factored).
@@ -61,5 +63,16 @@ namespace StructuralAPI.CalculationEngines
         {
             return ((windUDL * columnHeight) / 2) * windUDL;
         }
+        /// <summary>
+        /// Maximum allowable deflection value (mm).
+        /// </summary>
+        /// <param name="columnHeight"></param>
+        /// <param name="defLimVal"></param>
+        /// <returns></returns>
+        public static double CalculateMaxAllowableDefl(double columnHeight, double defLimVal)
+        {
+            return (columnHeight / defLimVal);
+        }
+
     }
 }
