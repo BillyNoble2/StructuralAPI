@@ -11,6 +11,7 @@ namespace StructuralAPI.CalculationEngines
             double factoredBendingMoment = CalculateBendingMoment(windUDL, request.WindLoadFactor, request.ColumnHeight);
             double factoredShearForce = CalculateShearForce(windUDL, request.WindLoadFactor, request.ColumnHeight);
             double maximumAllowableDef = CalculateMaxAllowableDefl(request.ColumnHeight, request.AllowableDeflection);
+            double minimumAllowableInn = CalculateMinimumInertia(windUDL, request.ColumnHeight, maximumAllowableDef);
         }
         /// <summary>
         /// Calculate uniform wind load on post (Factored).
@@ -72,6 +73,15 @@ namespace StructuralAPI.CalculationEngines
         public static double CalculateMaxAllowableDefl(double columnHeight, double defLimVal)
         {
             return (columnHeight / defLimVal);
+        }
+
+        public static double CalculateMinimumInertia(double windUDL, double columnHeight, double deflectionLimit)
+        {
+            var mmConvert = columnHeight * 1000;
+            var top = 5 * windUDL * (mmConvert * mmConvert * mmConvert);
+            var bottom = 384 * 205000 * deflectionLimit;
+
+            return (top / bottom);
         }
 
     }
