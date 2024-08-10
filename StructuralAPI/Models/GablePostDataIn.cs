@@ -11,6 +11,7 @@
         public double LiveLoadFactor { get; set; }
         public double WindLoadFactor { get; set; }
         public double RoofDeadLoad {  get; set; }
+        public double RoofServiceLoad {  get; set; }
         public double RoofLiveLoad { get; set; }
         public double AllowableDeflection { get; set; }
 
