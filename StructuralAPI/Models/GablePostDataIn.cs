@@ -6,6 +6,7 @@
         public double ColumnCentres { get; set; }
         public double FrameCentres { get; set; }
         public double PositiveWindPressure { get; set; }
+        public double NegativeWindPressure { get; set; }
         public double DeadLoadFactor { get; set; }
         public double LiveLoadFactor { get; set; }
         public double WindLoadFactor { get; set; }
